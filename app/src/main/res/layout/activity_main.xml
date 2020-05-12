@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".view.MainActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="565dp"
+        android:text="@string/berlinstreets"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.241" />
+
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="172dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="#EF3737"
+        android:text="@string/map"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="172dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="#00BAB4B4"
+        android:text="@string/login"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mapButton" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="172dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="175dp"
+        android:backgroundTint="#00FFFFFF"
+        android:text="@string/register"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
