@@ -3,20 +3,22 @@ package com.example.berlinstreets.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.berlinstreets.R;
 
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity {
+=======
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+>>>>>>> 53523d5... first commit | login -, registerActivities after the MVP-Pattern | http requests for login and registration
 
     //Database
 
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         map = findViewById(R.id.mapButton);
         login = findViewById(R.id.loginButton);
-        register = findViewById(R.id.registerButton);
+        register = findViewById(R.id.registerButtonMain);
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class dB extends AsyncTask<String, Void, Void> {
 
+<<<<<<< HEAD
         @Override
         protected Void doInBackground(String... strings) {
 
@@ -80,6 +83,20 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return null;
+=======
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.mapButton:
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
+                break;
+            case R.id.loginButton:
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                break;
+            case R.id.registerButtonMain:
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                break;
+>>>>>>> 53523d5... first commit | login -, registerActivities after the MVP-Pattern | http requests for login and registration
         }
     }
 }
