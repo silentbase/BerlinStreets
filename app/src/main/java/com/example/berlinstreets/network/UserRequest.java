@@ -28,7 +28,7 @@ public class UserRequest {
         StringRequest postRequest = new StringRequest(Request.Method.POST, "http://192.168.2.121:2000/user/login", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                
+                Toast.makeText(loginContext, response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override

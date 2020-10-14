@@ -5,7 +5,13 @@
 
     <string name="login">Login</string>
 
-    <string name="username">Username</string>
+    <string name="firstname">Firstname</string>
+
+    <string name="surename">Surename</string>
+
+    <string name="email">Email</string>
+
+    <string name="gender">Gender</string>
 
     <string name="password">Password</string>
 
