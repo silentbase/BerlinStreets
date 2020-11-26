@@ -1,6 +1,7 @@
 package com.example.berlinstreets.modul;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Patterns;
 
 import com.example.berlinstreets.network.UserRequest;
@@ -9,6 +10,7 @@ import java.io.StringBufferInputStream;
 
 public class User implements IUser {
 
+    private String ID;
     private String firstname;
     private String surename;
     private String gender;
@@ -44,6 +46,12 @@ public class User implements IUser {
         this.loginContext = loginContext;
     }
 
+    /**
+     * empty constructor for jUnit tests
+     */
+    public User(){
+    }
+
     @Override
     public boolean isLoginDataValid() {
 
@@ -71,22 +79,9 @@ public class User implements IUser {
         int emailSpace = email.trim().indexOf(" ");
         int passwordSpace = password.trim().indexOf(" ");
 
-        if (firstnameSpace != -1) {
+        if (firstnameSpace != -1 || surenameSpace != -1 || genderSpace != -1 || emailSpace != -1 || passwordSpace != -1) {
             return false;
         }
-        if (surenameSpace != -1) {
-            return false;
-        }
-        if (genderSpace != -1) {
-            return false;
-        }
-        if (emailSpace != -1) {
-            return false;
-        }
-        if (passwordSpace != -1) {
-            return false;
-        }
-
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             return false;
         }
@@ -107,5 +102,76 @@ public class User implements IUser {
     public void sendRegisterRequest() {
         UserRequest userRequest = new UserRequest();
         userRequest.registerRequest(firstname, surename, gender, email, password, loginContext);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "ID='" + ID + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", surename='" + surename + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    /*************************
+            GETTERS
+     *************************/
+    public String getID() {
+        return ID;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getSurename() {
+        return surename;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    /*************************
+            SETTERS
+     *************************/
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setSurename(String surename) {
+        this.surename = surename;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setLoginContext(Context loginContext) {
+        this.loginContext = loginContext;
     }
 }

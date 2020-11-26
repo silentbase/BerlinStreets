@@ -2,7 +2,9 @@ package com.example.berlinstreets.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,13 +19,15 @@ import com.example.berlinstreets.presenter.LoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements ILoginRegisterView {
 
-    private LoginPresenter loginPresenter;
-
     private EditText email;
     private EditText password;
     private Button signInButton;
     private TextView notRegistered;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ID = "ID";
+    public static final String EMAIL = "email";
+    public static final String FIRSTNAME = "first_name";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginRegisterVi
         notRegistered = findViewById(R.id.notRegisteredTextView);
 
 
-        loginPresenter = new LoginPresenter(this, this);
+        final LoginPresenter loginPresenter = new LoginPresenter(this, this);
 
         /**
          * by clicking on the "not registered" textview the user switches to the RegisterActivity
@@ -59,5 +63,20 @@ public class LoginActivity extends AppCompatActivity implements ILoginRegisterVi
     @Override
     public void loginFailedAlert(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void switchActivity() {
+        startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+    }
+
+    @Override
+    public void saveData(String id, String email, String firstname) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(ID, id);
+        editor.putString(EMAIL, email);
+        editor.putString(FIRSTNAME, firstname);
     }
 }

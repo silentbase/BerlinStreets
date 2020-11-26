@@ -52,4 +52,14 @@ public class RegisterActivity extends AppCompatActivity implements ILoginRegiste
     public void loginFailedAlert(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void switchActivity() {
+
+    }
+
+    @Override
+    public void saveData(String ID, String email, String firstname) {
+
+    }
 }
