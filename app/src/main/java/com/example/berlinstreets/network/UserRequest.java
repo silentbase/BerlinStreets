@@ -12,7 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.berlinstreets.modul.User;
 import com.example.berlinstreets.view.LoginActivity;
-import com.example.berlinstreets.view.MapsActivity;
+import com.example.berlinstreets.view.MapActivity;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class UserRequest implements UserRequestInterface {
      */
     public void loginRequest(final String email, final String password, final Context loginContext) {
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://"+IP+":2000/user/login", new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://" + IP + ":" + PORT + "/user/login", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -46,8 +46,8 @@ public class UserRequest implements UserRequestInterface {
                     Toast.makeText(loginContext, "Email-Passoword Kombination ist nicht korrekt", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    saveData("userData", loginContext, user.getID(),user.getEmail(),user.getFirstname());
-                    loginContext.startActivity(new Intent(loginContext, MapsActivity.class));
+                    saveUserData("userData", loginContext, user.getID(), user.getEmail(), user.getFirstname());
+                    loginContext.startActivity(new Intent(loginContext, MapActivity.class));
                 }
             }
         }, new Response.ErrorListener() {
@@ -71,7 +71,7 @@ public class UserRequest implements UserRequestInterface {
 
     public void registerRequest(final String firstname, final String surename, final String gender, final String email, final String password, final Context loginContext) {
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://"+IP+":2000/user/register", new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://" + IP + ":2000/user/register", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(loginContext, response, Toast.LENGTH_SHORT).show();
@@ -79,7 +79,7 @@ public class UserRequest implements UserRequestInterface {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(loginContext, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -97,7 +97,7 @@ public class UserRequest implements UserRequestInterface {
         RequestHandler.getInstance(loginContext).addToRequestQueue(postRequest);
     }
 
-    private void saveData(String sharedPrefName, Context context, String id, String email, String firstname) {
+    private void saveUserData(String sharedPrefName, Context context, String id, String email, String firstname) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("ID", id);

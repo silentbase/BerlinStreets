@@ -24,4 +24,6 @@
     <string name="map">Map</string>
 
     <string name="register">register</string>
+
+    <string name="sharedPrefs">SHARED_PREFS</string>
 </resources>

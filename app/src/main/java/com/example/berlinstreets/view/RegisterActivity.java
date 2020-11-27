@@ -11,9 +11,9 @@ import android.widget.Toast;
 import com.example.berlinstreets.R;
 import com.example.berlinstreets.presenter.RegisterPresenter;
 
-public class RegisterActivity extends AppCompatActivity implements ILoginRegisterView {
+public class RegisterActivity extends AppCompatActivity implements IView {
 
-    private RegisterPresenter registerPresenter;
+    // private RegisterPresenter registerPresenter;
 
     private EditText firstnameEditText;
     private EditText surenameEditText;
@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements ILoginRegiste
 
         registerButton = findViewById(R.id.registerButton);
 
-        registerPresenter = new RegisterPresenter(this, this);
+        final RegisterPresenter registerPresenter = new RegisterPresenter(this, this);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override

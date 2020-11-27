@@ -3,19 +3,19 @@ package com.example.berlinstreets.presenter;
 import android.content.Context;
 
 import com.example.berlinstreets.modul.User;
-import com.example.berlinstreets.view.ILoginRegisterView;
+import com.example.berlinstreets.view.IView;
 
 public class RegisterPresenter implements IPresenter {
 
     private User user;
 
-    private ILoginRegisterView registerView;
+    private IView registerView;
     private Context registerContext;
 
     /**
      * constructer, that takes in a context
      */
-    public RegisterPresenter(ILoginRegisterView registerView, Context registerContext) {
+    public RegisterPresenter(IView registerView, Context registerContext) {
         this.registerView = registerView;
         this.registerContext = registerContext;
     }

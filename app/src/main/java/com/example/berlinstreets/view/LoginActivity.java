@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.berlinstreets.R;
 import com.example.berlinstreets.presenter.LoginPresenter;
 
-public class LoginActivity extends AppCompatActivity implements ILoginRegisterView {
+public class LoginActivity extends AppCompatActivity implements IView {
 
     private EditText email;
     private EditText password;
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginRegisterVi
 
     @Override
     public void switchActivity() {
-        startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+        startActivity(new Intent(LoginActivity.this, MapActivity.class));
     }
 
     @Override

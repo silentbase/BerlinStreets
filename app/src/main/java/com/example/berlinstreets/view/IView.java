@@ -1,6 +1,6 @@
 package com.example.berlinstreets.view;
 
-public interface ILoginRegisterView {
+public interface IView {
 
     /**
      * creates a Toast, if login or register failed

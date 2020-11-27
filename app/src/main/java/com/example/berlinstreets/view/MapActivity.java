@@ -5,16 +5,19 @@ import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
 
 import com.example.berlinstreets.R;
+import com.example.berlinstreets.presenter.MapPresenter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback, IView {
 
     private GoogleMap mMap;
+    private Marker marker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        MapPresenter mapPresenter = new MapPresenter(this,this);
+
+
     }
 
     /**
@@ -43,5 +50,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(52.5065133,13.1445545);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+
+                marker = mMap.addMarker(markerOptions);
+                confirmMarker();
+
+            }
+        });
+    }
+
+    public void confirmMarker(){
+
+    }
+
+    public void markerSucceeded(){
+
+    }
+    public void  markerFailed(){
+
+    }
+
+    @Override
+    public void loginFailedAlert(String msg) {
+
+    }
+
+    @Override
+    public void switchActivity() {
+
+    }
+
+    @Override
+    public void saveData(String ID, String email, String firstname) {
+
     }
 }
