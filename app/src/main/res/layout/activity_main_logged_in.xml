@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".berlinView.MainActivity">
 
     <TextView
@@ -40,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/berlinStreetTextView" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/logoutButton"
         android:layout_width="172dp"
         android:layout_height="59dp"
         android:layout_marginStart="121dp"
@@ -48,28 +47,11 @@
         android:layout_marginEnd="118dp"
         android:layout_marginBottom="60dp"
         android:backgroundTint="#00BAB4B4"
-        android:text="@string/login"
+        android:text="@string/logout"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/registerButtonMain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapButton" />
-
-    <Button
-        android:id="@+id/registerButtonMain"
-        android:layout_width="172dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="118dp"
-        android:layout_marginBottom="175dp"
-        android:backgroundTint="#00FFFFFF"
-        android:text="@string/register"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
