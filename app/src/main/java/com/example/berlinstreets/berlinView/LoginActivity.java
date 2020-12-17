@@ -1,46 +1,62 @@
-package com.example.berlinstreets.view;
+package com.example.berlinstreets.berlinView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.berlinstreets.R;
-import com.example.berlinstreets.presenter.LoginPresenter;
+import com.example.berlinstreets.berlinModul.SessionManager;
+import com.example.berlinstreets.berlinPresenter.LoginPresenter;
 
-public class LoginActivity extends AppCompatActivity implements IView {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
     private Button signInButton;
     private TextView notRegistered;
 
-    public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String ID = "ID";
-    public static final String EMAIL = "email";
-    public static final String FIRSTNAME = "first_name";
+    private SessionManager sessionManager;
+
+   /* @Override
+    protected void onStart() {
+        sessionManager = new SessionManager(this);
+        sessionManager.checkLoginAppStart();
+        super.onStart();
+    }*/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //sessionManager = new SessionManager(this);
+        //sessionManager.checkLoginAppStart();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         email = findViewById(R.id.emailEdittext);
         password = findViewById(R.id.passwordEdittext);
 
         signInButton = findViewById(R.id.signInButton);
         notRegistered = findViewById(R.id.notRegisteredTextView);
 
+        sessionManager = new SessionManager(this);
+        if (sessionManager.isLoggedIn()) {
+            email.setText(sessionManager.getUserData().get("email"));
+        }
 
-        final LoginPresenter loginPresenter = new LoginPresenter(this, this);
+        final LoginPresenter loginPresenter = new LoginPresenter(this);
 
         /**
          * by clicking on the "not registered" textview the user switches to the RegisterActivity
@@ -58,25 +74,5 @@ public class LoginActivity extends AppCompatActivity implements IView {
                 loginPresenter.setData(email.getText().toString(), password.getText().toString());
             }
         });
-    }
-
-    @Override
-    public void loginFailedAlert(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void switchActivity() {
-        startActivity(new Intent(LoginActivity.this, MapActivity.class));
-    }
-
-    @Override
-    public void saveData(String id, String email, String firstname) {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putString(ID, id);
-        editor.putString(EMAIL, email);
-        editor.putString(FIRSTNAME, firstname);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.berlinstreets.presenter;
+package com.example.berlinstreets.berlinPresenter;
 
 public interface IPresenter {
 

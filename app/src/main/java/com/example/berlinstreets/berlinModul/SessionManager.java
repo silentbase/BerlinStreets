@@ -1,4 +1,4 @@
-package com.example.berlinstreets.modul;
+package com.example.berlinstreets.berlinModul;
 
 import android.app.Activity;
 import android.app.Application;
@@ -7,12 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.berlinstreets.view.LoginActivity;
-import com.example.berlinstreets.view.MapActivity;
+import com.example.berlinstreets.berlinView.LoginActivity;
+import com.example.berlinstreets.berlinView.MapActivity;
 
 import java.util.HashMap;
 
-public class SessionManager extends Application implements ISessionManager{
+public class SessionManager extends Application implements ISessionManager {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -27,11 +27,6 @@ public class SessionManager extends Application implements ISessionManager{
 
     public SessionManager(Context context) {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-    }
-    public SessionManager(){
-        this.context = this;
         sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
@@ -53,8 +48,6 @@ public class SessionManager extends Application implements ISessionManager{
         if (isLoggedIn()) {
             context.startActivity(new Intent(context, MapActivity.class));
             ((Activity) context).finish();
-            Log.d("tag","activity destroyed");
-
         }
     }
 
@@ -74,6 +67,7 @@ public class SessionManager extends Application implements ISessionManager{
 
     public HashMap<String, String> getUserData() {
         HashMap<String, String> user = new HashMap<>();
+        user.put(ID, sharedPreferences.getString(ID, ""));
         user.put(EMAIL, sharedPreferences.getString(EMAIL, ""));
         user.put(FIRSTNAME, sharedPreferences.getString(FIRSTNAME, ""));
 

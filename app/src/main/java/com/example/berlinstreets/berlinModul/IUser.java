@@ -1,4 +1,4 @@
-package com.example.berlinstreets.modul;
+package com.example.berlinstreets.berlinModul;
 
 public interface IUser {
 
@@ -19,7 +19,7 @@ public interface IUser {
     void sendLoginRequest();
 
     /**
-     * end PostRequest to save new user to db
+     * send PostRequest to save new user to db
      */
     void sendRegisterRequest();
 }

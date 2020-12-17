@@ -1,19 +1,15 @@
 package com.example.berlinstreets;
 
-import android.content.Context;
-import android.content.ContextWrapper;
-
-import com.example.berlinstreets.MyApplication;
-import com.example.berlinstreets.modul.User;
-import com.example.berlinstreets.presenter.LoginPresenter;
-import com.example.berlinstreets.view.LoginActivity;
+import com.example.berlinstreets.berlinModul.User;
+import com.example.berlinstreets.berlinPresenter.LoginPresenter;
+import com.squareup.okhttp.mockwebserver.MockWebServer;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class UserTest {
+public class NetworkTest {
     User user;
 
     @Before
@@ -23,6 +19,8 @@ public class UserTest {
 
     @Test
     public void sendLoginRequest() {
+        MockWebServer mockWebServer = new MockWebServer();
+
         user.setEmail("suheib@gmail.com");
         user.setPassword("password123");
 

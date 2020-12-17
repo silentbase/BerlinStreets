@@ -1,12 +1,9 @@
-package com.example.berlinstreets.modul;
+package com.example.berlinstreets.berlinModul;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Patterns;
 
-import com.example.berlinstreets.network.UserRequest;
-
-import java.io.StringBufferInputStream;
+import com.example.berlinstreets.berlinNetwork.UserRequest;
 
 public class User implements IUser {
 
@@ -17,7 +14,7 @@ public class User implements IUser {
     private String email;
     private String password;
 
-    private Context loginContext;
+    private Context context;
 
     /**
      * constructr for login
@@ -25,10 +22,10 @@ public class User implements IUser {
      * @param email
      * @param password
      */
-    public User(String email, String password, Context loginContext) {
+    public User(String email, String password, Context context) {
         this.email = email;
         this.password = password;
-        this.loginContext = loginContext;
+        this.context = context;
     }
 
     /**
@@ -37,25 +34,25 @@ public class User implements IUser {
      * @param email
      * @param password
      */
-    public User(String firstname, String surename, String gender, String email, String password, Context loginContext) {
+    public User(String firstname, String surename, String gender, String email, String password, Context context) {
         this.firstname = firstname;
         this.surename = surename;
         this.gender = gender;
         this.email = email;
         this.password = password;
-        this.loginContext = loginContext;
+        this.context = context;
     }
 
     /**
      * empty constructor for jUnit tests
      */
-    public User(){
+    public User() {
     }
 
     @Override
     public boolean isLoginDataValid() {
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()) {
             return false;
         }
 
@@ -95,13 +92,13 @@ public class User implements IUser {
     @Override
     public void sendLoginRequest() {
         UserRequest userRequest = new UserRequest();
-        userRequest.loginRequest(email, password, loginContext);
+        userRequest.loginRequest(email, password, context);
     }
 
     @Override
     public void sendRegisterRequest() {
         UserRequest userRequest = new UserRequest();
-        userRequest.registerRequest(firstname, surename, gender, email, password, loginContext);
+        userRequest.registerRequest(firstname, surename, gender, email, password, context);
     }
 
     @Override
@@ -117,7 +114,7 @@ public class User implements IUser {
     }
 
     /*************************
-            GETTERS
+     GETTERS
      *************************/
     public String getID() {
         return ID;
@@ -144,7 +141,7 @@ public class User implements IUser {
     }
 
     /*************************
-            SETTERS
+     SETTERS
      *************************/
 
     public void setID(String ID) {
@@ -171,7 +168,7 @@ public class User implements IUser {
         this.password = password;
     }
 
-    public void setLoginContext(Context loginContext) {
-        this.loginContext = loginContext;
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

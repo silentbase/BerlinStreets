@@ -15,6 +15,9 @@ android {
     }
 
     testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
         unitTests.returnDefaultValues = true
     }
 
@@ -32,11 +35,18 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.android.volley:volley:1.1.1'
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.22'
     testImplementation 'androidx.test:core:1.0.0'
+    androidTestImplementation 'com.squareup.okhttp:mockwebserver:2.7.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+    // Optional -- Hamcrest library
+    androidTestImplementation 'org.hamcrest:hamcrest-library:1.3'
 }

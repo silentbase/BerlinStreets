@@ -1,14 +1,16 @@
 package com.example.berlinstreets;
 
-import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 
-public class MyApplication extends Application {
+import com.example.berlinstreets.berlinView.LoginActivity;
+
+public class MyApplication extends LoginActivity {
 
     private static Context context;
 
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         MyApplication.context = getApplicationContext();
     }
 

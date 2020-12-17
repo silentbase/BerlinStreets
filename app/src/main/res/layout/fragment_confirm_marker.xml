@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".berlinView.ConfirmMarkerFragment"
+    android:clickable="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="143dp"
+        android:layout_gravity="bottom"
+        android:background="#ABEF3737">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="146dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="37dp"
+            android:autofillHints="Select" />
+
+        <FrameLayout
+            android:layout_width="82dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            >
+
+            <ProgressBar
+                android:id="@+id/progressBarMarker"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="69dp"
+                android:layout_height="61dp"
+                android:layout_gravity="center"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/confirmMarkerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="#65000000"
+            android:stateListAnimator="@null"
+            android:text="@string/confirm"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+    </FrameLayout>
+
+</FrameLayout>

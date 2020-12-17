@@ -1,4 +1,4 @@
-package com.example.berlinstreets.modul;
+package com.example.berlinstreets.berlinModul;
 
 public interface ISessionManager {
 

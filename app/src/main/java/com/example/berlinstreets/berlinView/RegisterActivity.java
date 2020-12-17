@@ -1,4 +1,4 @@
-package com.example.berlinstreets.view;
+package com.example.berlinstreets.berlinView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,12 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.berlinstreets.R;
-import com.example.berlinstreets.presenter.RegisterPresenter;
+import com.example.berlinstreets.berlinPresenter.RegisterPresenter;
 
-public class RegisterActivity extends AppCompatActivity implements IView {
+public class RegisterActivity extends AppCompatActivity {
 
     // private RegisterPresenter registerPresenter;
 
@@ -37,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements IView {
 
         registerButton = findViewById(R.id.registerButton);
 
-        final RegisterPresenter registerPresenter = new RegisterPresenter(this, this);
+        final RegisterPresenter registerPresenter = new RegisterPresenter(this);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,18 +47,4 @@ public class RegisterActivity extends AppCompatActivity implements IView {
         });
     }
 
-    @Override
-    public void loginFailedAlert(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void switchActivity() {
-
-    }
-
-    @Override
-    public void saveData(String ID, String email, String firstname) {
-
-    }
 }

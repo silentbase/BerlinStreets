@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.example.berlinstreets.modul.User;
-import com.example.berlinstreets.network.UserRequest;
+import com.example.berlinstreets.berlinModul.User;
+import com.example.berlinstreets.berlinNetwork.UserRequest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class ExampleInstrumentedTest {
         user.setEmail("suheib@gmail.com");
         user.setPassword("password123");
 
-        user.setLoginContext(MyApplication.getAppContext());
+        user.setContext(MyApplication.getAppContext());
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
