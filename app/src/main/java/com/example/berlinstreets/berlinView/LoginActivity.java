@@ -51,12 +51,12 @@ public class LoginActivity extends AppCompatActivity {
         signInButton = findViewById(R.id.signInButton);
         notRegistered = findViewById(R.id.notRegisteredTextView);
 
-        sessionManager = new SessionManager(this);
+        final LoginPresenter loginPresenter = new LoginPresenter(this);
+
+        sessionManager = loginPresenter.getSession(this);
         if (sessionManager.isLoggedIn()) {
             email.setText(sessionManager.getUserData().get("email"));
         }
-
-        final LoginPresenter loginPresenter = new LoginPresenter(this);
 
         /**
          * by clicking on the "not registered" textview the user switches to the RegisterActivity

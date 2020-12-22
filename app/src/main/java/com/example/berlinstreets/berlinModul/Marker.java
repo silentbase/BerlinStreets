@@ -5,7 +5,8 @@ import android.content.Context;
 import com.example.berlinstreets.berlinNetwork.MapRequest;
 
 public class Marker implements IMarker {
-    private String ID;
+
+    private String _id;
     private String userID;
     private String title;
     private String street;
@@ -33,7 +34,7 @@ public class Marker implements IMarker {
     }
 
     public Marker(String userId, Context mapContext) {
-        this.userID = userID;
+        this.userID = userId;
         this.mapContext = mapContext;
     }
 
@@ -69,12 +70,17 @@ public class Marker implements IMarker {
         mapRequest.getMarkerOfCurrentUserRequest(userID, mapContext);
     }
 
+    public void sendDeleteMarkerRequest() {
+        MapRequest mapRequest = new MapRequest();
+        mapRequest.deleteMarkerRequest(userID, mapContext);
+    }
+
     /*************************
      GETTERS
      *************************/
 
-    public String getID() {
-        return ID;
+    public String get_Id() {
+        return _id;
     }
 
     public String getUserID() {
@@ -103,5 +109,12 @@ public class Marker implements IMarker {
 
     public float getLangt() {
         return Float.parseFloat(langt);
+    }
+
+    /*************************
+     SETTERS
+     *************************/
+    public void set_Id(String _Id) {
+        this._id = _Id;
     }
 }

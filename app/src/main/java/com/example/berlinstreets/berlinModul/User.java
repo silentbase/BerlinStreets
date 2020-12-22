@@ -52,7 +52,10 @@ public class User implements IUser {
     @Override
     public boolean isLoginDataValid() {
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()) {
+        email = email.trim();
+        password = password.trim();
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             return false;
         }
 
@@ -65,6 +68,11 @@ public class User implements IUser {
 
     @Override
     public boolean isRegisterDataValid() {
+        firstname = firstname.trim();
+        surename = surename.trim();
+        gender = gender.trim();
+        email = email.trim();
+        password = password.trim();
 
         if (firstname.length() < 1 || surename.length() < 1 || gender.length() < 1) {
             return false;

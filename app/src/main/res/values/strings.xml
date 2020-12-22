@@ -27,7 +27,7 @@
 
     <string name="sharedPrefs">SHARED_PREFS</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bitte_melden_Sie_sich_an">Bitte melden Sie sich an.</string>
     <string name="logout">Logout</string>
     <string name="confirm">Confirm</string>
     <string name="titel">Titel</string>
@@ -39,7 +39,11 @@
         <item>Blitzer</item>
         <item>Stau</item>
     </string-array>
+
     <string name="title_activity_main2">MainActivity2</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Map</string>
+    <string name="tab_text_2">My Markers</string>
+    <string name="adresse">Adresse</string>
+    <string name="title">Title</string>
+    <string name="deleteButtonSymbol">delete</string>
 </resources>

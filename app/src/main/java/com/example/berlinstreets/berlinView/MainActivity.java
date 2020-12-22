@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             logout = findViewById(R.id.logoutButton);
             begruessung = findViewById(R.id.berlinStreetTextView);
             logout.setOnClickListener(this);
-            begruessung.setText("Hallo, "+ mapPresenter.getSession().getUserData().get("firstname"));
+            begruessung.setText("Hallo, " + mapPresenter.getSession().getUserData().get("firstname"));
             ;
         } else {
             setContentView(R.layout.activity_main);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mapButton:
-                startActivity(new Intent(MainActivity.this, MapActivity.class));
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
                 break;
             case R.id.loginButton:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
+        finishAffinity();
         super.onBackPressed();
     }
 }

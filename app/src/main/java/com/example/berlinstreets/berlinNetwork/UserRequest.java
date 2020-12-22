@@ -7,26 +7,21 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.berlinstreets.berlinModul.SessionManager;
 import com.example.berlinstreets.berlinModul.User;
 import com.example.berlinstreets.berlinView.LoginActivity;
 import com.example.berlinstreets.berlinView.MainActivity;
-import com.example.berlinstreets.berlinView.MapActivity;
+import com.example.berlinstreets.berlinView.MapsActivity;
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserRequest implements IUserRequest {
 
-    private LoginActivity loginActivity;
     private SessionManager sessionManager;
     private final String IP = "192.168.2.121";
     private final String PORT = "2000";
@@ -54,7 +49,7 @@ public class UserRequest implements IUserRequest {
                 } else {
                     sessionManager = new SessionManager(loginContext);
                     sessionManager.createSession(user.getID(), user.getEmail(), user.getFirstname());
-                    loginContext.startActivity(new Intent(loginContext, MapActivity.class));
+                    loginContext.startActivity(new Intent(loginContext, MapsActivity.class));
                     ((Activity) loginContext).finish();
                 }
             }

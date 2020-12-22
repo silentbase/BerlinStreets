@@ -5,10 +5,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.example.berlinstreets.berlinView.LoginActivity;
-import com.example.berlinstreets.berlinView.MapActivity;
+import com.example.berlinstreets.berlinView.MapsActivity;
 
 import java.util.HashMap;
 
@@ -46,7 +45,7 @@ public class SessionManager extends Application implements ISessionManager {
 
     public void checkLoginAppStart() {
         if (isLoggedIn()) {
-            context.startActivity(new Intent(context, MapActivity.class));
+            context.startActivity(new Intent(context, MapsActivity.class));
             ((Activity) context).finish();
         }
     }

@@ -1,28 +1,18 @@
 package com.example.berlinstreets.berlinNetwork;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.berlinstreets.berlinModul.Marker;
-import com.example.berlinstreets.berlinView.MapActivity;
+import com.example.berlinstreets.berlinModul.SessionManager;
+import com.example.berlinstreets.berlinView.MapsActivity;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +20,8 @@ public class MapRequest implements IMapRequest {
 
     private final String IP = "192.168.2.121";
     private final String PORT = "2000";
+
+    private SessionManager sessionManager;
 
     /**
      * @param userID
@@ -49,11 +41,11 @@ public class MapRequest implements IMapRequest {
                 Marker marker = gson.fromJson(response, Marker.class);
 
                 if (marker.getUserID() == null) {
-                    ((MapActivity) mapContext).markerFailed();
+                    ((MapsActivity) mapContext).markerFailed();
                     //TODO: ((MapActivity) mapContext).
                 } else {
-                    ((MapActivity) mapContext).markerSucceeded();
-                    Log.d("bebe","!?!?!");
+                    ((MapsActivity) mapContext).markerSucceeded();
+                    Log.d("bebe", "!?!?!");
                     //saveMarkerData("markerData", mapContext, marker.getID());
                 }
             }
@@ -81,18 +73,18 @@ public class MapRequest implements IMapRequest {
     }
 
     /**
-     * @param Id
+     * @param markerId
      * @param mapContext
      */
-    public void deleteMarkerRequest(String Id, final Context mapContext) {
+    public void deleteMarkerRequest(String markerId, final Context mapContext) {
 
 
-        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, "http://" + IP + ":" + PORT + "/map/deleteMarker" + Id, new Response.Listener<String>() {
+        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, "http://" + IP + ":" + PORT + "/map/deleteMarker/" + markerId, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                if (response == null) {
-                    Toast.makeText(mapContext, response, Toast.LENGTH_SHORT).show();
+                if (response != null) {
+                    Toast.makeText(mapContext, "Marker wurde gelöscht!", Toast.LENGTH_SHORT).show();
                 } else {
                     //TODO: delete from list
                 }
@@ -100,7 +92,7 @@ public class MapRequest implements IMapRequest {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(mapContext, "Fehler", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -115,13 +107,13 @@ public class MapRequest implements IMapRequest {
         StringRequest getRequest = new StringRequest(Request.Method.GET, "http://" + IP + ":" + PORT + "/map/getMarker", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 Gson gson = new Gson();
-                Log.d("bebe", "h11212");
+                Marker[] markers;
+
                 if (response.length() != 0) {
-                    Log.d("bebe", "!!!!");
-                    Marker[] markers = gson.fromJson(response, Marker[].class);
-                    ((MapActivity) mapContext).setMarkers(markers);
-                    Log.d("bebe", response+"..null");
+                    markers = gson.fromJson(response, Marker[].class);
+                    ((MapsActivity) mapContext).setMarkers(markers);
                 } else {
 
                 }
@@ -139,20 +131,25 @@ public class MapRequest implements IMapRequest {
     }
 
     /**
-     * @param Id
+     * @param userId
      * @param mapContext
      */
-    public void getMarkerOfCurrentUserRequest(String Id, final Context mapContext) {
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, "http://" + IP + ":" + PORT + "/map/getMarker" + Id, null, new Response.Listener<JSONObject>() {
+    public void getMarkerOfCurrentUserRequest(String userId, final Context mapContext) {
+        StringRequest getRequest = new StringRequest(Request.Method.GET, "http://" + IP + ":" + PORT + "/map/getMarker/" + userId, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("");
-                    JSONObject em = jsonArray.getJSONObject(2);
-                    Gson g = new Gson();
+            public void onResponse(String response) {
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                Gson gson = new Gson();
+                Marker[] markers;
+
+                if (response.length() != 0) {
+                    Log.d("bebe", "setMarkers!!");
+                    markers = gson.fromJson(response, Marker[].class);
+                    ((MapsActivity) mapContext).setListData(markers);
+                    Log.d("sese", markers[0].get_Id());
+
+                } else {
+
                 }
 
             }
@@ -163,11 +160,5 @@ public class MapRequest implements IMapRequest {
             }
         });
         RequestHandler.getInstance(mapContext).addToRequestQueue(getRequest);
-    }
-
-    private void saveMarkerData(String sharedPrefName, Context context, String id) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(sharedPrefName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("ID", id);
     }
 }

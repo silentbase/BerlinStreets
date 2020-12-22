@@ -1,12 +1,11 @@
 package com.example.berlinstreets.berlinPresenter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
 import com.example.berlinstreets.berlinModul.Marker;
 import com.example.berlinstreets.berlinModul.SessionManager;
-import com.example.berlinstreets.berlinView.MapActivity;
+import com.example.berlinstreets.berlinView.MapsActivity;
 
 public class MapPresenter implements IPresenter {
 
@@ -39,10 +38,10 @@ public class MapPresenter implements IPresenter {
 
         } else {
 
-            ((MapActivity) mapContext).runOnUiThread(new Runnable() {
+            ((MapsActivity) mapContext).runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ((MapActivity) mapContext).onBackPressed();
+                    ((MapsActivity) mapContext).onBackPressed();
                     Toast.makeText(mapContext, "Keine Adresse für diesen Marker gefunden", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -54,8 +53,11 @@ public class MapPresenter implements IPresenter {
     }
 
     public void getUserMarkers() {
-        if (marker.isMarkerDataValid())
             marker.sendGetMarkersOfUser();
+    }
+
+    public void deleteMarker(){
+        marker.sendDeleteMarkerRequest();
     }
 }
 
