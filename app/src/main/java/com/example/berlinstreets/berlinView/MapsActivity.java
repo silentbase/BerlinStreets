@@ -36,7 +36,7 @@ public class MapsActivity extends AppCompatActivity implements ConfirmMarkerFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         mapPresenter = new MapPresenter(this);
-        sectionsPagerAdapter = new SectionsPagerAdapter(this,this, mapPresenter, getSupportFragmentManager());
+        sectionsPagerAdapter = new SectionsPagerAdapter(this, mapPresenter, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -48,7 +48,8 @@ public class MapsActivity extends AppCompatActivity implements ConfirmMarkerFrag
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mapsFragment.getCurrentLocation();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 

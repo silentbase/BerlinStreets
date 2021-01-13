@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class NetworkTest2 {
+public class NetworkTest {
     User user;
 
     @Before

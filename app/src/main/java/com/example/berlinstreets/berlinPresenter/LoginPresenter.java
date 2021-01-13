@@ -16,9 +16,9 @@ public class LoginPresenter implements IPresenter {
         this.loginContext = loginContext;
     }
 
-    public void createSession(String ID, String email, String firstname) {
-        sessionManager = new SessionManager(loginContext);
-        sessionManager.createSession(ID, email, firstname);
+    public SessionManager getSession(Context context) {
+        sessionManager = new SessionManager(context);
+        return sessionManager;
     }
 
     @Override

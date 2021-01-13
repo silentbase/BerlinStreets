@@ -21,16 +21,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private Fragment fragment;
     private MapPresenter mapPresenter;
-    private MapsActivity mapsActivity;
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
     private final Context mContext;
 
-    public SectionsPagerAdapter(Context context,MapsActivity mapsActivity, MapPresenter mapPresenter, FragmentManager fm) {
+    public SectionsPagerAdapter(Context context, MapPresenter mapPresenter, FragmentManager fm) {
         super(fm);
         mContext = context;
         this.mapPresenter = mapPresenter;
-        this.mapsActivity = mapsActivity;
     }
 
     @Override
@@ -39,7 +37,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                fragment = MapsFragment.newInstance(mapsActivity);
+                fragment = MapsFragment.newInstance();
                 ((MapsActivity) mContext).setMapFragment((MapsFragment) fragment);
                 break;
             case 1:

@@ -1,7 +1,5 @@
 package com.example.berlinstreets.berlinModul;
 
-import java.util.HashMap;
-
 public interface ISessionManager {
 
     /**
@@ -19,13 +17,18 @@ public interface ISessionManager {
     boolean isLoggedIn();
 
     /**
+     * checks if user is logged in and changes activity from Login - to Map activity
+     * if he is
+     */
+    void checkLoginAppStart();
+    /**
+     * checks if user is logged in and changes activity from map - to login activity
+     * if not
+     */
+    void checkLoginOnMap();
+
+    /**
      * clears shared prefs and thus logs out user
      */
     void logout();
-
-    /**
-     * returns user data
-     * @return
-     */
-    HashMap<String, String> getUserData();
 }
