@@ -54,6 +54,7 @@ public class UserTest {
         user.setSurename("Al-Khatib");
         user.setEmail("suheib@mail.de");
         user.setGender("male");
+        //password length has to be at least 6
         user.setPassword("123");
 
         assertFalse(user.isRegisterDataValid());

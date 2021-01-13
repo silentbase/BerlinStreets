@@ -38,6 +38,15 @@ public class Marker implements IMarker {
         this.mapContext = mapContext;
     }
 
+    public Marker(String userID, String title, String street, String houseNumber, String postalcode,Context mapContext) {
+        this.userID = userID;
+        this.title = title;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.postalcode = postalcode;
+        this.mapContext = mapContext;
+    }
+
     public boolean isMarkerDataValid() {
         if (userID == null || title == null || street == null || houseNumber == null || postalcode == null) {
             return false;

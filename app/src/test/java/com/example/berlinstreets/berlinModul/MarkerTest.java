@@ -15,14 +15,14 @@ public class MarkerTest {
         assertTrue(marker.isMarkerDataValid());
     }
 
-    //test if false
+    //test if false if one string is < 1
     @Test
     public void testMarkerDataValidation2(){
         marker = new Marker("123ID213", "title", "", "3","1243", null);
         assertFalse(marker.isMarkerDataValid());
     }
 
-    //test if false
+    //test if false String is null
     @Test
     public void testMarkerDataValidation3(){
         marker = new Marker();

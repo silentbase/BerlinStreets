@@ -10,7 +10,22 @@ public interface IMarker {
     boolean isMarkerDataValid();
 
     /**
-     * sends Postrequest to save new MArker to db
+     * sends Postrequest to save new Marker to db
      */
     void sendAddMarkerRequest();
+
+    /**
+     * sends Getrequest to get all markers
+     */
+    void sendGetMarkers();
+
+    /**
+     * sends Getrequest to get all markers of the current user
+     */
+    void sendGetMarkersOfUser();
+
+    /**
+     * sends Deleterequest to delete specific marker
+     */
+    void sendDeleteMarkerRequest();
 }

@@ -18,10 +18,7 @@ import java.util.Map;
 
 public class MapRequest implements IMapRequest {
 
-    private final String IP = "192.168.2.121";
-    private final String PORT = "2000";
-
-    private SessionManager sessionManager;
+    private final String URL = "https://berlinstreets.herokuapp.com";
 
     /**
      * @param userID
@@ -33,7 +30,7 @@ public class MapRequest implements IMapRequest {
      */
     public void addMarkerRequest(final String userID, final String title, final String street, final String houseNumber, final String postalcode, final String langt, final String longt, final Context mapContext) {
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://" + IP + ":" + PORT + "/map/addMarker", new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL + "/map/addMarker", new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -79,7 +76,7 @@ public class MapRequest implements IMapRequest {
     public void deleteMarkerRequest(String markerId, final Context mapContext) {
 
 
-        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, "http://" + IP + ":" + PORT + "/map/deleteMarker/" + markerId, new Response.Listener<String>() {
+        StringRequest deleteRequest = new StringRequest(Request.Method.DELETE, URL  + "/map/deleteMarker/" + markerId, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -104,7 +101,7 @@ public class MapRequest implements IMapRequest {
      */
     public void getMarkerRequest(final Context mapContext) {
 
-        StringRequest getRequest = new StringRequest(Request.Method.GET, "http://" + IP + ":" + PORT + "/map/getMarker", new Response.Listener<String>() {
+        StringRequest getRequest = new StringRequest(Request.Method.GET, URL+"/map/getMarker", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -135,7 +132,7 @@ public class MapRequest implements IMapRequest {
      * @param mapContext
      */
     public void getMarkerOfCurrentUserRequest(String userId, final Context mapContext) {
-        StringRequest getRequest = new StringRequest(Request.Method.GET, "http://" + IP + ":" + PORT + "/map/getMarker/" + userId, new Response.Listener<String>() {
+        StringRequest getRequest = new StringRequest(Request.Method.GET, URL+"/map/getMarker/" + userId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 

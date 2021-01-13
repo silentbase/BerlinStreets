@@ -30,15 +30,9 @@ public class MainActivityTest {
      * test button visibility
      */
     @Test
-    public void checkMapButtonIsVisible(){
+    public void checkMainButtonsIsVisible(){
         Espresso.onView(withId(R.id.mapButton)).check(matches(isDisplayed()));
-    }
-    @Test
-    public void checkLoginButtonIsVisible(){
         Espresso.onView(withId(R.id.loginButton)).check(matches(isDisplayed()));
-    }
-    @Test
-    public void checkRegisterButtonIsVisible(){
         Espresso.onView(withId(R.id.registerButtonMain)).check(matches(isDisplayed()));
     }
 
@@ -49,13 +43,13 @@ public class MainActivityTest {
     @Test
     public void checkMapButtonSwitchesToMapActivity(){
         Espresso.onView(withId(R.id.mapButton)).perform(click());
-        Espresso.onView(withId(R.id.map)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.mapsActivityLayout)).check(matches(isDisplayed()));
 
     }
     @Test
     public void checkLoginButtonSwitchesToLoginActivity(){
         Espresso.onView(withId(R.id.loginButton)).perform(click());
-        Espresso.onView(withId(R.id.loginLayout)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.loginActivityLayout)).check(matches(isDisplayed()));
     }
     @Test
     public void checkRegisterButtonSwitchesToRegisterActivity(){

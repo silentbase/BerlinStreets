@@ -1,11 +1,10 @@
-package com.example.berlinstreets.berlinModul;
+package com.example.berlinstreets;
 
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -22,12 +21,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -35,15 +32,13 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SessionManagerTest {
+public class MainActivityTest2 {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void sessionManagerTest() {
-
-
+    public void mainActivityTest2() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -56,10 +51,9 @@ public class SessionManagerTest {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.loginButton), withText("Login"),
                         childAtPosition(
-                                allOf(withId(R.id.mainLayout),
-                                        childAtPosition(
-                                                withId(android.R.id.content),
-                                                0)),
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
                                 2),
                         isDisplayed()));
         appCompatButton.perform(click());
@@ -82,9 +76,29 @@ public class SessionManagerTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("suheib@gmail.de"), closeSoftKeyboard());
+        appCompatEditText.perform(click());
 
         ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.emailEdittext),
+                        childAtPosition(
+                                allOf(withId(R.id.loginActivityLayout),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        appCompatEditText2.perform(replaceText("suheib@gmail.de"), closeSoftKeyboard());
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.passwordEdittext),
                         childAtPosition(
                                 allOf(withId(R.id.loginActivityLayout),
@@ -93,9 +107,9 @@ public class SessionManagerTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("111111"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("111111"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText3 = onView(
+        ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.passwordEdittext), withText("111111"),
                         childAtPosition(
                                 allOf(withId(R.id.loginActivityLayout),
@@ -104,7 +118,7 @@ public class SessionManagerTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText3.perform(pressImeActionButton());
+        appCompatEditText4.perform(pressImeActionButton());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.signInButton), withText("Sign in"),
@@ -116,29 +130,6 @@ public class SessionManagerTest {
                                 4),
                         isDisplayed()));
         appCompatButton2.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        pressBack();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Espresso.onView(withId(R.id.mainLoggedInLayout)).check(matches(isDisplayed()));
-
-         Espresso.onView(withId(R.id.logoutButton)).perform(click());
-
-        Espresso.onView(withId(R.id.mainLayout)).check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(

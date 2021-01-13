@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.berlinstreets.R;
 import com.example.berlinstreets.berlinModul.Marker;
@@ -46,7 +47,6 @@ public class MarkerListFragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,6 +74,7 @@ public class MarkerListFragment extends Fragment {
         return fragment;
     }
 
+
     public MarkerListFragment() {
         // Required empty public constructor
     }
@@ -97,13 +98,23 @@ public class MarkerListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.marker_fragment_list, container, false);
-        return view;
+        return inflater.inflate(R.layout.marker_fragment_list, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mapPresenter.getUserMarkers();
+            }
+        });
+
+
 
         listView = view.findViewById(R.id.markerListViewId);
         deleteButton = view.findViewById(R.id.markerDeleteButtonId);
@@ -146,8 +157,7 @@ public class MarkerListFragment extends Fragment {
                         listView.setAdapter(myAdapter);
                     }
                 });
-
-                Log.d("bebe", "hallo zsm");
+                swipeRefreshLayout.setRefreshing(false);
             }
         }).start();
     }
@@ -188,7 +198,6 @@ public class MarkerListFragment extends Fragment {
 
             return horizontal;
         }
-
 
     }
 }

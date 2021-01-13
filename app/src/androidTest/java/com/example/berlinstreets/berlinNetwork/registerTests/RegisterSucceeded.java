@@ -1,4 +1,4 @@
-package com.example.berlinstreets.berlinModul;
+package com.example.berlinstreets.berlinNetwork.registerTests;
 
 
 import android.view.View;
@@ -22,10 +22,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -35,15 +33,23 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SessionManagerTest {
+
+/**
+ *  --NOTE--
+ * These tests can only be executed correctly,
+ * if no one is logged in
+ */
+public class RegisterSucceeded {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    /**
+     * This test can only be executed correctly once.
+     * For a second successful execution change the email that needs to be registered
+     */
     @Test
-    public void sessionManagerTest() {
-
-
+    public void registerSucceeded() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -54,13 +60,13 @@ public class SessionManagerTest {
         }
 
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.loginButton), withText("Login"),
+                allOf(withId(R.id.registerButtonMain), withText("register"),
                         childAtPosition(
                                 allOf(withId(R.id.mainLayout),
                                         childAtPosition(
                                                 withId(android.R.id.content),
                                                 0)),
-                                2),
+                                3),
                         isDisplayed()));
         appCompatButton.perform(click());
 
@@ -74,71 +80,80 @@ public class SessionManagerTest {
         }
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.emailEdittext),
+                allOf(withId(R.id.firstnameEditText),
                         childAtPosition(
-                                allOf(withId(R.id.loginActivityLayout),
+                                allOf(withId(R.id.registerLinearLayout),
                                         childAtPosition(
-                                                withId(android.R.id.content),
+                                                withId(R.id.registerActivityLayout),
                                                 0)),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("suheib@gmail.de"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("s"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.passwordEdittext),
+                allOf(withId(R.id.surenameEditText),
                         childAtPosition(
-                                allOf(withId(R.id.loginActivityLayout),
+                                allOf(withId(R.id.registerLinearLayout),
                                         childAtPosition(
-                                                withId(android.R.id.content),
+                                                withId(R.id.registerActivityLayout),
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("111111"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("s"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.passwordEdittext), withText("111111"),
+                allOf(withId(R.id.genderEditText),
                         childAtPosition(
-                                allOf(withId(R.id.loginActivityLayout),
+                                allOf(withId(R.id.registerLinearLayout),
                                         childAtPosition(
-                                                withId(android.R.id.content),
+                                                withId(R.id.registerActivityLayout),
                                                 0)),
-                                1),
+                                2),
                         isDisplayed()));
-        appCompatEditText3.perform(pressImeActionButton());
+        appCompatEditText3.perform(replaceText("s"), closeSoftKeyboard());
 
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.signInButton), withText("Sign in"),
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.emailEditTextRegister),
                         childAtPosition(
-                                allOf(withId(R.id.loginActivityLayout),
+                                allOf(withId(R.id.registerLinearLayout),
                                         childAtPosition(
-                                                withId(android.R.id.content),
+                                                withId(R.id.registerActivityLayout),
+                                                0)),
+                                3),
+                        isDisplayed()));
+        //change the e-mail if u wanna execute the test multiple times (e.g. test2@gmail.de)
+        appCompatEditText4.perform(replaceText("test@gmail.de"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText5 = onView(
+                allOf(withId(R.id.passwordEditTextRegister),
+                        childAtPosition(
+                                allOf(withId(R.id.registerLinearLayout),
+                                        childAtPosition(
+                                                withId(R.id.registerActivityLayout),
                                                 0)),
                                 4),
                         isDisplayed()));
+        appCompatEditText5.perform(replaceText("111111"), closeSoftKeyboard());
+
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.registerButton), withText("register"),
+                        childAtPosition(
+                                allOf(withId(R.id.registerActivityLayout),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
         appCompatButton2.perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(2500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        pressBack();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Espresso.onView(withId(R.id.mainLoggedInLayout)).check(matches(isDisplayed()));
-
-         Espresso.onView(withId(R.id.logoutButton)).perform(click());
-
         Espresso.onView(withId(R.id.mainLayout)).check(matches(isDisplayed()));
+
     }
 
     private static Matcher<View> childAtPosition(

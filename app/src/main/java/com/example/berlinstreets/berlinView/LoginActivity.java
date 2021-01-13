@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,13 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView notRegistered;
 
     private SessionManager sessionManager;
-
-   /* @Override
-    protected void onStart() {
-        sessionManager = new SessionManager(this);
-        sessionManager.checkLoginAppStart();
-        super.onStart();
-    }*/
 
     @Override
     public void onBackPressed() {
@@ -53,9 +47,11 @@ public class LoginActivity extends AppCompatActivity {
 
         final LoginPresenter loginPresenter = new LoginPresenter(this);
 
-        sessionManager = loginPresenter.getSession(this);
-        if (sessionManager.isLoggedIn()) {
-            email.setText(sessionManager.getUserData().get("email"));
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            Log.d("lele", "extras");
+            email.setText(extras.getString("EMAIL"));
         }
 
         /**
